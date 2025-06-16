@@ -22,7 +22,7 @@ Episodio::Episodio(const int _id, string _nombre,const int _duration, string _ge
  * @brief Method to present the episode's details including title, duration, and rating.
  *
  * This function outputs the formatted details of an episode to the standard console.
- * It displays the episode's unique ID, title, duration in a formatted manner,
+ * It displays the episode's unique ID, title, duration in a formatted manner
  * and its current rating.
  */
 void Episodio::Presentar() {
