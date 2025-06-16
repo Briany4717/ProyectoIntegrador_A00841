@@ -18,17 +18,29 @@ protected:
     Serie* serie;
     Video* episodio1;
     Video* episodio2;
+    Video* episodio3;
+    Video* episodio4;
+    Video* episodio5;
+    Video* episodio6;
 
     void SetUp() override {
         serie = new Serie(100, "Breaking Bad", "Drama");
         episodio1 = new Episodio(101, "Episodio 1", 2700, "Drama");
         episodio2 = new Episodio(102, "Episodio 2", 2800, "Drama");
+        episodio3 = new Episodio(103, "Episodio 3", 2700, "Drama");
+        episodio4 = new Episodio(104, "Episodio 4", 2800, "Drama");
+        episodio5 = new Episodio(105, "Episodio 5", 2700, "Drama");
+        episodio6 = new Episodio(106, "Episodio 6", 2800, "Drama");
     }
 
     void TearDown() override {
         delete serie;
         delete episodio1;
         delete episodio2;
+        delete episodio3;
+        delete episodio4;
+        delete episodio5;
+        delete episodio6;
     }
 };
 
@@ -51,13 +63,31 @@ TEST_F(SerieTest, AgregarEpisodioIncrementa) {
 TEST_F(SerieTest, AgregarMultiplesEpisodios) {
     serie->AddEpisodio(episodio1);
     serie->AddEpisodio(episodio2);
+    serie->AddEpisodio(episodio3);
+    serie->AddEpisodio(episodio4);
+    serie->AddEpisodio(episodio5);
 
-    EXPECT_EQ(serie->GetDuration(), 2);
+    EXPECT_EQ(serie->GetDuration(), 5);
     vector<Video*> episodios = serie->GetEpisodios();
     EXPECT_EQ(episodios.size(), 2);
 }
 
 TEST_F(SerieTest, AgregarEpisodioConIdDuplicado) {
+    Video* episodio_duplicado = new Episodio(101, "Episodio Duplicado", 3000, "Drama");
+
+    serie->AddEpisodio(episodio1);
+
+    testing::internal::CaptureStderr();
+    serie->AddEpisodio(episodio_duplicado);
+    string error_output = testing::internal::GetCapturedStderr();
+
+    EXPECT_FALSE(error_output.empty());
+    EXPECT_EQ(serie->GetDuration(), 1); // Solo debe tener 1 episodio
+
+    delete episodio_duplicado;
+}
+
+TEST_F(SerieTest, AgregarEpisodioConIdDuplicado2) {
     Video* episodio_duplicado = new Episodio(101, "Episodio Duplicado", 3000, "Drama");
 
     serie->AddEpisodio(episodio1);
@@ -91,6 +121,9 @@ TEST_F(SerieTest, PresentarOutput) {
 TEST_F(SerieTest, MostrarEpisodios) {
     serie->AddEpisodio(episodio1);
     serie->AddEpisodio(episodio2);
+    serie->AddEpisodio(episodio3);
+    serie->AddEpisodio(episodio4);
+    serie->AddEpisodio(episodio5);
 
     testing::internal::CaptureStdout();
     serie->MostrarEpisodios();
@@ -98,4 +131,7 @@ TEST_F(SerieTest, MostrarEpisodios) {
 
     EXPECT_TRUE(output.find("Episodio 1") != string::npos);
     EXPECT_TRUE(output.find("Episodio 2") != string::npos);
+    EXPECT_TRUE(output.find("Episodio 3") != string::npos);
+    EXPECT_TRUE(output.find("Episodio 4") != string::npos);
+    EXPECT_TRUE(output.find("Episodio 5") != string::npos);
 }
