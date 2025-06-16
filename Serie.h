@@ -54,7 +54,7 @@ public:
      * This destructor ensures proper cleanup when a Serie object goes out
      * of scope or is explicitly deleted, preventing resource leaks.
      */
-    ~Serie() override;
+    ~Serie() override = default;
 
     /**
      * Retrieves the list of episodes.

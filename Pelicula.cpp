@@ -8,8 +8,9 @@
 #include "Pelicula.h"
 
     Pelicula::Pelicula(const int _id, string _nombre,const int _duration, string _genero):
-    Video(_id,std::move(_nombre),_duration,std::move(_genero)){};
-    Pelicula::~Pelicula() = default;
+    Video(_id,std::move(_nombre),_duration,std::move(_genero)) {
+        int a = 1+1;
+    };
     void Pelicula::Presentar() {
         cout<< id <<".- |"<< nombre << "| ------- Calificación: " << GetCalificacion() << endl
         << "   Duración: " << FormatDuration()

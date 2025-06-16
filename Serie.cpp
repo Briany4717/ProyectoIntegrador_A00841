@@ -8,8 +8,10 @@
 #include "Serie.h"
 
     Serie::Serie(const int _id, string _nombre, string _genero):
-    Video(_id,_nombre,0,_genero){};
-    Serie::~Serie() = default;
+    Video(_id,_nombre,0,_genero)
+    {
+        int a = 1+1;
+    };
 
     vector<Video*> Serie::GetEpisodios() const{
         return episodios;

@@ -40,7 +40,7 @@ public:
      * is defined as `default`, it relies on the compiler to generate the
      * appropriate cleanup code.
      */
-    ~Pelicula();
+    ~Pelicula() override = default;
 
     /**
      * @brief Outputs detailed information about the movie to standard output.
