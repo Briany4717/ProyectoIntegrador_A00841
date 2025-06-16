@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 
+#include "Episodio.h"
 #include "Serie.h"
 
 class SerieTest : public ::testing::Test {

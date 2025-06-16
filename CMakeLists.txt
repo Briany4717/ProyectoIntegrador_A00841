@@ -17,8 +17,8 @@ add_executable(SituacionProblema main.cpp
         Episodio.cpp
         Episodio.h)
 
-option(ENABLE_TESTING "Enable a Unit Testing build." OFF)
-option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+option(ENABLE_TESTING "Enable a Unit Testing build." ON)
+option(ENABLE_COVERAGE "Enable coverage reporting" ON)
 
 if (ENABLE_COVERAGE)
     message(STATUS "Enabling coverage flags for GCC/Clang")
