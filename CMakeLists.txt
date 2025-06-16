@@ -52,11 +52,11 @@ if(ENABLE_TESTING)
     endfunction()
 
     # Archivos de pruebas
-    add_test_executable(test_pelicula tests/test_pelicula.cpp)
-    add_test_executable(test_serie tests/test_serie.cpp)
-    add_test_executable(test_episodio tests/test_episodio.cpp)
-    add_test_executable(test_integracion tests/test_Integracion.cpp)
-    add_test_executable(test_limites tests/test_limites.cpp)
+    add_test_executable(test_pelicula test/test_pelicula.cpp)
+    add_test_executable(test_serie test/test_serie.cpp)
+    add_test_executable(test_episodio test/test_episodio.cpp)
+    add_test_executable(test_integracion test/test_Integracion.cpp)
+    add_test_executable(test_limites test/test_limites.cpp)
 
     # Generar reportes de cobertura
     if (ENABLE_COVERAGE)
