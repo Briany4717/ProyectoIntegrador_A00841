@@ -6,7 +6,7 @@
 
     Video::Video(const int _id, string _nombre,const int _duration, string _genero):
     id(_id),nombre(std::move(_nombre)),duration(_duration),
-    genero(std::move(_genero)){};
+    genero(std::move(_genero)),calificaciones({}){};
 
     int Video::getId() const {
         return id;
@@ -26,7 +26,7 @@
         }
 
         double promedio = 0;
-        for (int cal : calificaciones) {
+        for (const int cal : calificaciones) {
             promedio += cal;
         }
         return promedio / static_cast<double>(calificaciones.size());

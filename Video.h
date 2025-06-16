@@ -8,6 +8,7 @@
 #import <string>
 #import <sstream>
 #import <iostream>
+#import <vector>
 using namespace std;
 
 class Video {
@@ -18,7 +19,7 @@ protected:
     string genero;
     vector<int> calificaciones;
 public:
-    Video(const int _id, string _nombre,const int _duration, string _genero);
+    Video(int _id, string _nombre,int _duration, string _genero);
 
     int getId() const;
     string getNombre()const;
@@ -26,7 +27,7 @@ public:
     string getGenero()const;
     double getCalificacion() const;
     virtual void presentar() = 0;
-    bool calificar(const int calif);
+    bool calificar(int calif);
     string formatDuration() const;
     virtual ~Video() = default;
 };
