@@ -8,7 +8,7 @@
 #include "Serie.h"
 
     Serie::Serie(const int _id, string _nombre, string _genero):
-    Video(_id,std::move(_nombre),0,std::move(_genero)){};
+    Video(_id,_nombre,0,_genero){};
     Serie::~Serie() = default;
 
     vector<Video*> Serie::GetEpisodios() const{

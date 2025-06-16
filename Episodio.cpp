@@ -16,8 +16,8 @@
  */
 #include "Episodio.h"
 Episodio::Episodio(const int _id, string _nombre,const int _duration, string _genero):
-Video(_id,std::move(_nombre),_duration,
-    std::move(_genero)){};
+Video(_id,_nombre,_duration,
+    _genero){};
 
 
 
@@ -30,9 +30,12 @@ Video(_id,std::move(_nombre),_duration,
  */
 void Episodio::Presentar() {
     cout << id << ".- Titulo: " << nombre
-    << " Duración: " << FormatDuration()
-    << " Calificación: " << GetCalificacion()
+    << " Duración: "
+    << FormatDuration()
+    << " Calificación: "
+    << GetCalificacion()
     << endl;
+
 
 
     };
