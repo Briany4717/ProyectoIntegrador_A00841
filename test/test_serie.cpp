@@ -18,9 +18,9 @@ protected:
     Serie* serie;
     Video* episodio1;
     Video* episodio2;
-    Video* episodio3;
-    Video* episodio4;
-    Video* episodio5;
+    Episodio* episodio3;
+    Episodio* episodio4;
+    Episodio* episodio5;
     Video* episodio6;
 
     void SetUp() override {
@@ -69,7 +69,7 @@ TEST_F(SerieTest, AgregarMultiplesEpisodios) {
 
     EXPECT_EQ(serie->GetDuration(), 5);
     vector<Video*> episodios = serie->GetEpisodios();
-    EXPECT_EQ(episodios.size(), 2);
+    EXPECT_EQ(episodios.size(), 5);
 }
 
 TEST_F(SerieTest, AgregarEpisodioConIdDuplicado) {
