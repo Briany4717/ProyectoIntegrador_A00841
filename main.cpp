@@ -126,6 +126,7 @@ void filtrarVideos(const vector<Video*> videos,const string &tipof,const string 
 
 int main() {
 
+    cargarArchivo("videos.csv");
     int op = 10;
     while (op != 0) {
         cout << "---------- Menú ----------" << endl;
@@ -141,14 +142,6 @@ int main() {
             if (op < 0 || op > 6) throw invalid_argument("Opción invalida. Intente de nuevo.");
 
             switch (op) {
-                case 1: {
-                    cout << "Ingrese el nombre del archivo (.csv en la carpeta donde se ->ejecute<- este programa [.exe,.sh,etc..]):\n-> ";
-                    cin.ignore();
-                    string file;
-                    getline(cin, file);
-                    cargarArchivo(file);
-                    break;
-                }
                 case 2: {
                     for(auto* video : db) {
                         video->Presentar();
@@ -229,7 +222,7 @@ int main() {
                             }
                         }
                     }
-                    if (!finded) throw invalid_argument("El id o nombre de la serie que busca no existe.");
+                    if (!finded) throw invalid_argument("El id o nombre de la serie no existe.");
                     cout << "Presiona Enter para continuar...";
                     cin.ignore();
                     cin.get();
@@ -249,7 +242,6 @@ int main() {
                     cin >> response;
                         if (videoSelected->Calificar(stoi(response))) {} else throw invalid_argument("La respuesta debe ser un valor entero.");
                     }
-                default: ;
             }
         }catch (exception& e) {
             cerr << e.what() << endl;
