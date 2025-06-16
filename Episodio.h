@@ -44,6 +44,8 @@ public:
      * The method is overridden from the `Video` base class.
      */
     void Presentar() override;
+
+    ~Episodio() override = default;
 };
 
 
