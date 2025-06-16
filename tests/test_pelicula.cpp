@@ -9,6 +9,12 @@
 #include "Pelicula.h"
 using namespace std;
 
+TEST(SimpleTest, BasicAssertion) {
+    EXPECT_EQ(2 + 2, 4);
+    EXPECT_TRUE(true);
+}
+
+
 class PeliculaTest : public ::testing::Test {
 protected:
     Pelicula* pelicula;
