@@ -17,7 +17,9 @@
 #include "Episodio.h"
 Episodio::Episodio(const int _id, string _nombre,const int _duration, string _genero):
 Video(_id,_nombre,_duration,
-    _genero){};
+    _genero) {
+    int a = 1+1;
+};
 
 
 
