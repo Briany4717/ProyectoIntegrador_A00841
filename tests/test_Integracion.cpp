@@ -57,7 +57,7 @@ TEST_F(IntegrationTest, BuscarVideoPorNombre) {
     }
 
     ASSERT_NE(encontrado, nullptr);
-    EXPECT_EQ(encontrado->getId(), 2);
+    EXPECT_EQ(encontrado->GetId(), 2);
 }
 
 TEST_F(IntegrationTest, FiltrarPorGenero) {
