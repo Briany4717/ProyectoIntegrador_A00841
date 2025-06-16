@@ -3,9 +3,9 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
-#include "video.h"
-#include "serie.h"
-#include "pelicula.h"
+#include "Video.h"
+#include "Serie.h"
+#include "Pelicula.h"
 
 vector<Video*> db;
 
