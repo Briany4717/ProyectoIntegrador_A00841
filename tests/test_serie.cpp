@@ -1,7 +1,9 @@
-//
-// Created by Brian Roberto Gómez Martínez on 15/06/25.
-//
-
+/*
+* Proyecto Integrador TC1013B - A00841404
+ * Copyright (C) Instituto Tecnológico de Estudios Superiores de Monterrey
+ * http://tec.mx/
+ *
+ */
 #include <gtest/gtest.h>
 #include <sstream>
 #include <iostream>
@@ -31,52 +33,52 @@ protected:
 };
 
 TEST_F(SerieTest, ConstructorInicializaCorrectamente) {
-    EXPECT_EQ(serie->getId(), 100);
-    EXPECT_EQ(serie->getNombre(), "Breaking Bad");
-    EXPECT_EQ(serie->getDuration(), 0); // Inicia con 0 episodios
-    EXPECT_EQ(serie->getGenero(), "Drama");
+    EXPECT_EQ(serie->GetId(), 100);
+    EXPECT_EQ(serie->GetNombre(), "Breaking Bad");
+    EXPECT_EQ(serie->GetDuration(), 0); // Inicia con 0 episodios
+    EXPECT_EQ(serie->GetGenero(), "Drama");
 }
 
 TEST_F(SerieTest, AgregarEpisodioIncrementa) {
-    serie->addEpisodio(episodio1);
-    EXPECT_EQ(serie->getDuration(), 1); // Ahora tiene 1 episodio
+    serie->AddEpisodio(episodio1);
+    EXPECT_EQ(serie->GetDuration(), 1); // Ahora tiene 1 episodio
 
-    vector<Video*> episodios = serie->getEpisodios();
+    vector<Video*> episodios = serie->GetEpisodios();
     EXPECT_EQ(episodios.size(), 1);
-    EXPECT_EQ(episodios[0]->getId(), 101);
+    EXPECT_EQ(episodios[0]->GetId(), 101);
 }
 
 TEST_F(SerieTest, AgregarMultiplesEpisodios) {
-    serie->addEpisodio(episodio1);
-    serie->addEpisodio(episodio2);
+    serie->AddEpisodio(episodio1);
+    serie->AddEpisodio(episodio2);
 
-    EXPECT_EQ(serie->getDuration(), 2);
-    vector<Video*> episodios = serie->getEpisodios();
+    EXPECT_EQ(serie->GetDuration(), 2);
+    vector<Video*> episodios = serie->GetEpisodios();
     EXPECT_EQ(episodios.size(), 2);
 }
 
 TEST_F(SerieTest, AgregarEpisodioConIdDuplicado) {
     Video* episodio_duplicado = new Episodio(101, "Episodio Duplicado", 3000, "Drama");
 
-    serie->addEpisodio(episodio1);
+    serie->AddEpisodio(episodio1);
 
     testing::internal::CaptureStderr();
-    serie->addEpisodio(episodio_duplicado);
+    serie->AddEpisodio(episodio_duplicado);
     string error_output = testing::internal::GetCapturedStderr();
 
     EXPECT_FALSE(error_output.empty());
-    EXPECT_EQ(serie->getDuration(), 1); // Solo debe tener 1 episodio
+    EXPECT_EQ(serie->GetDuration(), 1); // Solo debe tener 1 episodio
 
     delete episodio_duplicado;
 }
 
 TEST_F(SerieTest, PresentarOutput) {
-    serie->calificar(4);
-    serie->addEpisodio(episodio1);
-    serie->addEpisodio(episodio2);
+    serie->Calificar(4);
+    serie->AddEpisodio(episodio1);
+    serie->AddEpisodio(episodio2);
 
     testing::internal::CaptureStdout();
-    serie->presentar();
+    serie->Presentar();
     string output = testing::internal::GetCapturedStdout();
 
     EXPECT_TRUE(output.find("Breaking Bad") != string::npos);
@@ -87,11 +89,11 @@ TEST_F(SerieTest, PresentarOutput) {
 }
 
 TEST_F(SerieTest, MostrarEpisodios) {
-    serie->addEpisodio(episodio1);
-    serie->addEpisodio(episodio2);
+    serie->AddEpisodio(episodio1);
+    serie->AddEpisodio(episodio2);
 
     testing::internal::CaptureStdout();
-    serie->mostrarEpisodios();
+    serie->MostrarEpisodios();
     string output = testing::internal::GetCapturedStdout();
 
     EXPECT_TRUE(output.find("Episodio 1") != string::npos);

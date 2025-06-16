@@ -51,7 +51,7 @@ void cargarArchivo(const string& file) {
                         // Buscar la serie correspondiente
                         Serie* seriePadre = nullptr;
                         for (Serie* serie : series) {
-                            if (serie->getId() == idSerieNum) {
+                            if (serie->GetId() == idSerieNum) {
                                 seriePadre = serie;
                                 break;
                             }
@@ -59,7 +59,7 @@ void cargarArchivo(const string& file) {
                         
                         if (seriePadre != nullptr) {
                             Video* nuevoEpisodio = new Pelicula(idNum, titulo, duracionNum, genero);
-                            seriePadre->addEpisodio(nuevoEpisodio);
+                            seriePadre->AddEpisodio(nuevoEpisodio);
                         }
                     }
                     else {
@@ -99,8 +99,8 @@ void filtrarVideos(const vector<Video*> videos,const string &tipof,const string 
         const string tipo = dynamic_cast<Serie*>(v) ? "serie" :
                           dynamic_cast<Pelicula*>(v) ? "pelicula" : "otro";
         if (tipo != tipof && tipof != "-") pasa = false;
-        if (v->getGenero() != genf && genf != "-") pasa = false;
-        if (v->getNombre() != nombref && nombref != "-") pasa = false;
+        if (v->GetGenero() != genf && genf != "-") pasa = false;
+        if (v->GetNombre() != nombref && nombref != "-") pasa = false;
         if (califf != "-") {
             if (!isdigit(califf[0]) && califf.size() >= 2 && califf[1] == '=') {
             } else if (califf[0] == '<' || califf[0] == '>' || califf[0] == '=') {
@@ -108,7 +108,7 @@ void filtrarVideos(const vector<Video*> videos,const string &tipof,const string 
                 califf = "=" + califf;
             }
 
-            double cal = v->getCalificacion();
+            double cal = v->GetCalificacion();
             size_t start = (califf[1] == '=') ? 2 : 1;
             double val = stod(califf.substr(start));
             string cmp = califf.substr(0, start);
@@ -120,7 +120,7 @@ void filtrarVideos(const vector<Video*> videos,const string &tipof,const string 
             else if (cmp == "=" && !(cal == val)) pasa = false;
 
         }
-        if (pasa) v->presentar();
+        if (pasa) v->Presentar();
     }
 }
 
@@ -144,7 +144,7 @@ int main() {
             switch (op) {
                 case 2: {
                     for(auto* video : db) {
-                        video->presentar();
+                        video->Presentar();
                     }
                     cout << "Presiona Enter para continuar...";
                     cin.ignore();
@@ -176,9 +176,9 @@ int main() {
                     Serie* serieSelected = nullptr;
                     for (Video* v : db) {
                         if (std::isdigit(response[0])) {
-                            if (dynamic_cast<Serie*>(v) && dynamic_cast<Serie*>(v)->getId() == stoi(response)) {
-                                cout << "----|" << v->getNombre() << "|----" << endl;
-                                dynamic_cast<Serie*>(v)->mostrarEpisodios();
+                            if (dynamic_cast<Serie*>(v) && dynamic_cast<Serie*>(v)->GetId() == stoi(response)) {
+                                cout << "----|" << v->GetNombre() << "|----" << endl;
+                                dynamic_cast<Serie*>(v)->MostrarEpisodios();
                                 cout << "Filtrar? [s/n]" << endl;
                                 char fyn;
                                 cin >> fyn;
@@ -186,7 +186,7 @@ int main() {
                                     cin.ignore();
                                     if (dynamic_cast<Serie*>(v) != nullptr) {
                                         Serie* serie = dynamic_cast<Serie*>(v);
-                                        vector<Video*> episodios = serie->getEpisodios();
+                                        vector<Video*> episodios = serie->GetEpisodios();
                                         string nombref = askFilter("Nombre = ");
                                         string califf = askFilter("Califiación (Use =, <, > o <=, >= dependiendo lo que busque): ");
 
@@ -199,8 +199,8 @@ int main() {
                                 break;
                             }
                         }else {
-                            if (string nombre = dynamic_cast<Serie*>(v)->getNombre(); dynamic_cast<Serie*>(v) && nombre == response) {
-                                dynamic_cast<Serie*>(v)->mostrarEpisodios();
+                            if (string nombre = dynamic_cast<Serie*>(v)->GetNombre(); dynamic_cast<Serie*>(v) && nombre == response) {
+                                dynamic_cast<Serie*>(v)->MostrarEpisodios();
                                 cout << "Filtrar? [s/n]" << endl;
                                 char fyn;
                                 cin >> fyn;
@@ -208,7 +208,7 @@ int main() {
                                     cin.ignore();
                                     if (dynamic_cast<Serie*>(v) != nullptr) {
                                         Serie* serie = dynamic_cast<Serie*>(v);
-                                        vector<Video*> episodios = serie->getEpisodios();
+                                        vector<Video*> episodios = serie->GetEpisodios();
                                         string nombref = askFilter("Nombre = ");
                                         string califf = askFilter("Califiación (Use =, <, > o <=, >= dependiendo lo que busque): ");
 
@@ -235,12 +235,12 @@ int main() {
                     getline(cin, response);
                     Video* videoSelected = nullptr;
                     for (Video* v : db) {
-                        if ((std::isdigit(response[0]) && v->getId() == stoi(response))||v->getNombre() == response) videoSelected = v;
+                        if ((std::isdigit(response[0]) && v->GetId() == stoi(response))||v->GetNombre() == response) videoSelected = v;
                     }
                     if (videoSelected == nullptr) throw invalid_argument("El id o nombre del video no existe.");
-                    cout << "Qué calificación desea otorgarle a " << videoSelected->getNombre() << "?\n-> ";
+                    cout << "Qué calificación desea otorgarle a " << videoSelected->GetNombre() << "?\n-> ";
                     cin >> response;
-                        if (videoSelected->calificar(stoi(response))) {} else throw invalid_argument("La respuesta debe ser un valor entero.");
+                        if (videoSelected->Calificar(stoi(response))) {} else throw invalid_argument("La respuesta debe ser un valor entero.");
                     }
             }
         }catch (exception& e) {

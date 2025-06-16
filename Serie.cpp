@@ -1,6 +1,9 @@
-//
-// Created by Brian Roberto Gómez Martínez on 15/06/25.
-//
+/*
+* Proyecto Integrador TC1013B - A00841404
+ * Copyright (C) Instituto Tecnológico de Estudios Superiores de Monterrey
+ * http://tec.mx/
+ *
+ */
 
 #include "Serie.h"
 
@@ -8,26 +11,26 @@
     Video(_id,std::move(_nombre),0,std::move(_genero)){};
     Serie::~Serie() = default;
 
-    vector<Video*> Serie::getEpisodios() const{
+    vector<Video*> Serie::GetEpisodios() const{
         return episodios;
     }
-    void Serie::presentar(){
-        cout<< id <<".- |"<< nombre << "| ------- Calificación: " << getCalificacion() << endl
+    void Serie::Presentar(){
+        cout<< id <<".- |"<< nombre << "| ------- Calificación: " << GetCalificacion() << endl
         << "   Capítulos: " << duration
         <<"\n   Genero: "<< genero
         << "\n   Calificado por: " << calificaciones.size() << " usuarios." << endl;
     }
 
-    void Serie::mostrarEpisodios() const {
+    void Serie::MostrarEpisodios() const {
         for (Video* cap : episodios) {
-            cap->presentar();
+            cap->Presentar();
         }
     }
 
-    void Serie::addEpisodio(Video* episodio) {
+    void Serie::AddEpisodio(Video* episodio) {
         try {
             for (const Video* cap : episodios) {
-                if (cap->getId() == episodio->getId())
+                if (cap->GetId() == episodio->GetId())
                     throw invalid_argument("Este id ya existe en esta serie. Por favor escoja otro.");
             }
             episodios.push_back(episodio);

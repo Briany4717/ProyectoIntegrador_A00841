@@ -1,6 +1,9 @@
-//
-// Created by Brian Roberto Gómez Martínez on 15/06/25.
-//
+/*
+* Proyecto Integrador TC1013B - A00841404
+ * Copyright (C) Instituto Tecnológico de Estudios Superiores de Monterrey
+ * http://tec.mx/
+ *
+ */
 
 #include "Video.h"
 
@@ -8,19 +11,19 @@
     id(_id),nombre(std::move(_nombre)),duration(_duration),
     genero(std::move(_genero)),calificaciones({}){};
 
-    int Video::getId() const {
+    int Video::GetId() const {
         return id;
     }
-    string Video::getNombre()const {
+    string Video::GetNombre()const {
         return nombre;
     }
-    int Video::getDuration()const {
+    int Video::GetDuration()const {
         return duration;
     }
-    string Video::getGenero()const {
+    string Video::GetGenero()const {
         return genero;
     }
-    double Video::getCalificacion() const {
+    double Video::GetCalificacion() const {
         if (calificaciones.empty()) {
             return 0.0;  // O cualquier otro valor por defecto
         }
@@ -32,7 +35,7 @@
         return promedio / static_cast<double>(calificaciones.size());
     }
 
-    bool Video::calificar(const int calif) {
+    bool Video::Calificar(const int calif) {
         try {
             if (calif < 0 || calif >5) throw invalid_argument("Calificación invalida. Debe ser un número entre 0 y 5 incluyente.");
             calificaciones.push_back(calif);
@@ -42,7 +45,7 @@
             return false;
         }
     };
-    string Video::formatDuration() const {
+    string Video::FormatDuration() const {
         const int hours = duration / 3600;
         const int minutes = (duration % 3600) / 60;
         const int seconds = (duration % 3600) % 60;
